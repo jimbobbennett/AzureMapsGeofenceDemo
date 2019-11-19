@@ -7,11 +7,11 @@ This is demo code showing how to use Azure Maps geofences to test if a point is 
 To create an Azure Maps resource, first you need an Azure account.
 
 * Sign up for free and get $200 of credit to use for 30 days and 12 months of free services
-  https://aka.ms/FreeAZ
+  [aka.ms/FreeAZ](https://aka.ms/FreeAZ)
 
 * If you are a student, you can get $100 of credit and free services that last a year,
   and can be renewed each year you are a student, and doesn't require a credit card:
-  https://aka.ms/FreeStudentAzure
+  [aka.ms/FreeStudentAzure](https://aka.ms/FreeStudentAzure)
 
 Once you have an account, you will need to create an Azure Maps resource.
 
@@ -94,11 +94,9 @@ This python file contains code to run geofence queries from outside, then inside
 
 Run this code. It will call the same REST API to check the geofence, except with some new parameters:
 
-```json
-{
-    'mode': 'EnterAndExit',
-    'isAsync': 'True'
-}
+```sh
+'mode': 'EnterAndExit',
+'isAsync': 'True'
 ```
 
 This tell Azure Maps to trigger geofence events. The first two calls are outside the geofence, the third call is inside. Triggering them all in order will cause the maps to detect that the geofence has been entered and fire the event.
