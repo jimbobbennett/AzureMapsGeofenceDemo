@@ -18,6 +18,9 @@
 # All the docs for this are here: https://aka.ms/AzMapsGeofence
 
 import requests, json, os, time
+from dotenv import load_dotenv
+
+load_dotenv()
 
 maps_key = os.environ['MAPS_KEY']
 geofence_udid = os.environ['GEOFENCE_UDID']

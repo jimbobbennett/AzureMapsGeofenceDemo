@@ -15,8 +15,10 @@
 #   https://aka.ms/FreeStudentAzure
 #
 # All the docs for this are here: https://aka.ms/AzMapsGeofence
-
 import requests, json, os, time
+from dotenv import load_dotenv
+
+load_dotenv()
 
 maps_key = os.environ['MAPS_KEY']
 geofence_udid = ''
@@ -33,7 +35,9 @@ def upload_geofence():
     with open('geofence.json') as json_file:
         data = json.load(json_file)
 
-        geofence_create_response = requests.post(geofence_upload_url, params=params, json=data)
+        geofence_create_response = requests.post(geofence_upload_url, 
+                                                 params=params, 
+                                                 json=data)
         geofence_location = geofence_create_response.headers['location']
 
         response = requests.get(geofence_location, params=params)
@@ -65,7 +69,8 @@ def check_geofence(lat, lon):
     response_json = check_geofence_response.json()
     print()
     print('Distance to geofence:', response_json['geometries'][0]['distance'])
-    print('Nearest geofence location', response_json['geometries'][0]['nearestLon'], ',', response_json['geometries'][0]['nearestLat'])
+    print('Nearest geofence location', response_json['geometries'][0]['nearestLon'], 
+          ',', response_json['geometries'][0]['nearestLat'])
     print()
 
 def check_geofence_middle():
