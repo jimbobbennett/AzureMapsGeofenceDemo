@@ -1,3 +1,21 @@
+# This is a set of samples for use with Azure Maps.
+# This code covers creating a geofence, then querying it.
+# The three queries are for inside the geofence, outside, then inside but near the edge
+#
+# To use this code, create a .env file with an entry called MAPS_KEY set to the primary 
+# or secondary key of your Azure Maps resource.
+# 
+# To create an Azure Maps resource, first you need an Azure account.
+#
+# * Sign up for free and get $200 of credit to use for 30 days and 12 months of free services
+#   https://aka.ms/FreeAZ
+# 
+# * If you are a student, you can get $100 of credit and free services that last a year,
+#   and can be renewed each year you are a student, and doesn't require a credit card:
+#   https://aka.ms/FreeStudentAzure
+#
+# All the docs for this are here: https://aka.ms/AzMapsGeofence
+
 import requests, json, os, time
 
 maps_key = os.environ['MAPS_KEY']
@@ -30,22 +48,6 @@ def upload_geofence():
         print()
         print('Geofence UDID:', geofence_udid)
         print()
-
-def download_map_tile():
-    map_tile_download_url = 'https://atlas.microsoft.com/map/static/png'
-    params={
-        'subscription-key': maps_key,
-        'api-version': '1.0',
-        'layer': 'basic',
-        'style': 'main',
-        'center': '-122.124838829040525,47.661976221969933',
-        'zoom': 9,
-        'path': '||-122.41864 47.54548|-122.41864 47.70502|-122.00867 47.70502|-122.00867 47.54548|-122.41864 47.54548'
-    }
-
-    map_tile_response = requests.get(map_tile_download_url, params=params)
-    with open("map_tile.png", "wb") as map_file:
-        map_file.write(map_tile_response.content)
 
 def check_geofence(lat, lon):
     check_geofence_url = 'https://atlas.microsoft.com/spatial/geofence/json'
@@ -83,7 +85,6 @@ def check_geofence_edge():
 
 
 upload_geofence()
-download_map_tile()
 check_geofence_middle()
 check_geofence_outside()
 check_geofence_edge()
