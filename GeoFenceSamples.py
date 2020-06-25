@@ -43,10 +43,13 @@ def upload_geofence():
         response = requests.get(geofence_location, params=params)
         response_json = response.json()
 
-        while 'status' in response_json and response_json['status'] == 'InProgress':
+        while 'status' in response_json and response_json['status'] == 'Running':
             time.sleep(0.5)
             response = requests.get(geofence_location, params=params)
             response_json = response.json()
+        
+        resource_location = response.json()['resourceLocation']
+        response = requests.get(resource_location, params=params)
 
         geofence_udid = response.json()['udid']
         print()

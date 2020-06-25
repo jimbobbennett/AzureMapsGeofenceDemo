@@ -45,8 +45,9 @@ This function loads a geofence as [GeoJSON](http://geojson.org/), then uploads i
 
 * The geofence is loaded from the `geofence.json` file. This data was created by drawing a rectangular geofence using [geojson.io](http://geojson.io/).
 * This data is sent as a POST request to the Azure Maps data REST API, using the map key to authenticate the call.
-* Once posted, the response contains a header with a `location` value.
-* A GET request is made to this `location` to get the UDID of the geofence - it's unique id.
+* This request is asynchronous, so the function checks the status of the response, and polls until the request has finished.
+* Once finished, a URL is returned with a URL to the geofence.
+* A GET request is made to this URL to get the UDID of the geofence - it's unique id.
 
 #### `check_geofence`
 
